@@ -1,0 +1,31 @@
+# Application configuration
+# For all Spring related properties see https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+
+spring:
+  security:
+    external-login:
+      # Base redirection uri; For development purposes this should be set to http://localhost:3000 (SPA)
+      # On production env. this should be set to domain name.
+      base-url: http://localhost:3000
+
+    # Custom properties for OAuth1.0 Twitter Authorization
+    oauth:
+      client:
+        registration:
+          twitter:
+            # This should match what we have defined in our APP on https://developer.twitter.com/ as Callback URL
+            callback-url: http://localhost:8080/login/oauth1/code/twitter
+
+    oauth2:
+      client:
+        provider:
+          github:
+            scope: read:user,user:email
+
+          facebook:
+            user-info-uri: https://graph.facebook.com/me?fields=id,name,email
+
+# Logging
+logging:
+  level:
+    root: INFO
