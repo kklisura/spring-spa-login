@@ -1,9 +1,8 @@
 package com.github.kklisura.spring.spa.configuration.security.principal;
 
-import static org.springframework.security.core.authority.AuthorityUtils.createAuthorityList;
-
 import com.github.kklisura.spring.spa.domain.accounts.Account;
 import java.util.Collection;
+import java.util.Collections;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -25,7 +24,7 @@ public class AccountPrincipalUser extends AccountPrincipal implements UserDetail
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return createAuthorityList(getAccount().getRole().roleName());
+    return Collections.emptyList();
   }
 
   @Override

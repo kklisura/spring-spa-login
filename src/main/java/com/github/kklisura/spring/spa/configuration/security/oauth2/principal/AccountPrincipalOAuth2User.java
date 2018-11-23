@@ -1,10 +1,9 @@
 package com.github.kklisura.spring.spa.configuration.security.oauth2.principal;
 
-import static org.springframework.security.core.authority.AuthorityUtils.createAuthorityList;
-
 import com.github.kklisura.spring.spa.configuration.security.principal.AccountPrincipal;
 import com.github.kklisura.spring.spa.domain.accounts.Account;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -30,7 +29,7 @@ public class AccountPrincipalOAuth2User extends AccountPrincipal implements OAut
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return createAuthorityList(getAccount().getRole().roleName());
+    return Collections.emptyList();
   }
 
   @Override

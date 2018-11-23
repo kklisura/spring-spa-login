@@ -9,6 +9,7 @@ import com.github.kklisura.spring.spa.domain.accounts.external.ExternalAccount.T
 import com.github.kklisura.spring.spa.services.accounts.requests.AccountCreateRequest;
 import java.util.function.Supplier;
 import org.springframework.social.oauth1.OAuthToken;
+import org.springframework.social.twitter.api.TwitterProfile;
 
 /**
  * Wraps a twitter external info account supplier.
@@ -45,6 +46,13 @@ public class TwitterExternalAccountInfoSupplier implements ExternalAccountInfoSu
 
   @Override
   public AccountCreateRequest createAccountRequest() {
-    return null;
+    AccountCreateRequest request = new AccountCreateRequest();
+    request.setEmail(getExternalEmail());
+
+    final TwitterProfile twitterProfile = enrichedTwitterProfileSupplier.get().getTwitterProfile();
+    request.setUsername(twitterProfile.getName());
+    request.setDisplayName(twitterProfile.getScreenName());
+
+    return request;
   }
 }

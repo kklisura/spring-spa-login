@@ -10,11 +10,16 @@ import java.util.Optional;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
- * Created by Kenan Klisura on 22/11/2018.
+ * Account service contract.
  *
  * @author Kenan Klisura
  */
 public interface AccountService extends UserDetailsService, AccountUsernameGeneratorService {
+  /**
+   * Create a default user.
+   */
+  void createDefaultUser();
+
   /**
    * Finds an account given by external info.
    *

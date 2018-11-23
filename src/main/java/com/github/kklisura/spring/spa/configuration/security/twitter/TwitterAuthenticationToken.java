@@ -1,8 +1,7 @@
 package com.github.kklisura.spring.spa.configuration.security.twitter;
 
-import static org.springframework.security.core.authority.AuthorityUtils.createAuthorityList;
-
 import com.github.kklisura.spring.spa.configuration.security.principal.AccountPrincipal;
+import java.util.Collections;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 
 /**
@@ -14,7 +13,7 @@ public class TwitterAuthenticationToken extends AbstractAuthenticationToken {
   private AccountPrincipal accountPrincipal;
 
   public TwitterAuthenticationToken(AccountPrincipal accountPrincipal) {
-    super(createAuthorityList(accountPrincipal.getAccount().getRole().roleName()));
+    super(Collections.emptyList());
     this.accountPrincipal = accountPrincipal;
   }
 

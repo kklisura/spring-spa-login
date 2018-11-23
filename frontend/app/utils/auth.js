@@ -10,7 +10,6 @@ function registerOneTimeHandler(name, callback) {
 }
 
 function getPopupWindowOptions() {
-  // Fixes dual-screen position                         Most browsers      Firefox
   const dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : window.screenX;
   const dualScreenTop = window.screenTop != undefined ? window.screenTop : window.screenY;
 

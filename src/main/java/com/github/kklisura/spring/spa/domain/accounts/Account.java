@@ -1,13 +1,15 @@
 package com.github.kklisura.spring.spa.domain.accounts;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.kklisura.spring.spa.services.accounts.Role;
+import com.github.kklisura.spring.spa.domain.accounts.external.ExternalAccount;
+import com.github.kklisura.spring.spa.domain.accounts.external.ExternalAccount_;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -29,8 +31,6 @@ public class Account {
   @NotNull
   private String email;
 
-  // NOTE(kklisura): JsonIgnore is here, just to make sure if, for any reason, Account instance
-  // leaks as JSON, no password will be shown.
   @JsonIgnore
   private String password;
 
@@ -38,9 +38,8 @@ public class Account {
   @Column(name = "display_name")
   private String displayName;
 
-  @Column(name = "role")
-  @Enumerated(value = EnumType.STRING)
-  private Role role = Role.MEMBER;
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = ExternalAccount_.ACCOUNT)
+  private Set<ExternalAccount> externalAccounts;
 
   /**
    * Ctor.
@@ -123,24 +122,6 @@ public class Account {
   }
 
   /**
-   * Gets roleName.
-   *
-   * @return the roleName
-   */
-  public Role getRole() {
-    return role;
-  }
-
-  /**
-   * Sets roleName.
-   *
-   * @param role the roleName
-   */
-  public void setRole(Role role) {
-    this.role = role;
-  }
-
-  /**
    * Gets full name.
    *
    * @return the full name
@@ -166,5 +147,24 @@ public class Account {
   @JsonIgnore
   public boolean hasPasswordSet() {
     return getPassword() != null;
+  }
+
+  /**
+   * Gets external accounts.
+   *
+   * @return the external accounts
+   */
+  public Set<ExternalAccount> getExternalAccounts() {
+    return externalAccounts;
+  }
+
+  /**
+   * Sets external accounts.
+   *
+   * @param externalAccounts the external accounts
+   */
+  public void setExternalAccounts(
+      Set<ExternalAccount> externalAccounts) {
+    this.externalAccounts = externalAccounts;
   }
 }

@@ -1,5 +1,6 @@
 package com.github.kklisura.spring.spa.domain.accounts.external;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.kklisura.spring.spa.domain.accounts.Account;
 import java.util.function.Predicate;
 import javax.persistence.Column;
@@ -25,6 +26,7 @@ public class ExternalAccount {
   @GeneratedValue
   private Long id;
 
+  @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "accounts_id")
   private Account account;
@@ -33,6 +35,7 @@ public class ExternalAccount {
   @Enumerated(EnumType.STRING)
   private Type type;
 
+  @JsonIgnore
   @NotNull
   @Column(name = "external_id")
   private String externalId;

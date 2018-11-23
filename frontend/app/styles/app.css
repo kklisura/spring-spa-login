@@ -22,3 +22,8 @@ label {
   display: block;
   margin-bottom: 0.5rem;
 }
+
+.login-error {
+  color: red;
+  margin: 1rem 0;
+}

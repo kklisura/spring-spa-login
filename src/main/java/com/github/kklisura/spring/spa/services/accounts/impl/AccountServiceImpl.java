@@ -7,7 +7,6 @@ import com.github.kklisura.spring.spa.domain.accounts.external.ExternalAccount.T
 import com.github.kklisura.spring.spa.repositories.accounts.AccountRepository;
 import com.github.kklisura.spring.spa.repositories.accounts.external.ExternalAccountRepository;
 import com.github.kklisura.spring.spa.services.accounts.AccountService;
-import com.github.kklisura.spring.spa.services.accounts.Role;
 import com.github.kklisura.spring.spa.services.accounts.exceptions.NoPasswordSetServiceException;
 import com.github.kklisura.spring.spa.services.accounts.requests.AccountCreateRequest;
 import com.github.kklisura.spring.spa.services.exceptions.EntityNotFoundServiceException;
@@ -15,6 +14,8 @@ import java.util.List;
 import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,6 +28,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AccountServiceImpl implements AccountService {
+
+  // TODO(kklisura): Move this to application.yml configuration.
+  private static final String DEFAULT_USER_USERNAME = "admin";
+  private static final String DEFAULT_USER_DISPLAY_NAME = "Kenan Klisura";
+  private static final String DEFAULT_USER_EMAIL = "admin@example.com";
+  private static final String DEFAULT_USER_PASSWORD = "123456";
 
   private static final String USERNAME_NOT_FOUND_MESSAGE = "User account not found.";
 
@@ -63,6 +70,26 @@ public class AccountServiceImpl implements AccountService {
   @Autowired
   public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
     this.passwordEncoder = passwordEncoder;
+  }
+
+  @EventListener
+  public void createDefaultUserOnStartup(ContextRefreshedEvent event) {
+    // TODO(kklisura): Move this to separate class.
+    createDefaultUser();
+  }
+
+  @Override
+  public void createDefaultUser() {
+    final Optional<Account> defaultAccount = repository.findByEmailOrUsername(DEFAULT_USER_USERNAME);
+
+    if (!defaultAccount.isPresent()) {
+      Account account = new Account();
+      account.setDisplayName(DEFAULT_USER_DISPLAY_NAME);
+      account.setUsername(DEFAULT_USER_USERNAME);
+      account.setEmail(DEFAULT_USER_EMAIL);
+      account.setPassword(passwordEncoder.encode(DEFAULT_USER_PASSWORD));
+      repository.save(account);
+    }
   }
 
   @Override
@@ -130,7 +157,6 @@ public class AccountServiceImpl implements AccountService {
 
     account.setDisplayName(request.getDisplayName());
     account.setEmail(request.getEmail());
-    account.setRole(Role.MEMBER);
     account.setUsername(request.getUsername());
 
     if (StringUtils.isNotEmpty(request.getPassword())) {
