@@ -1,0 +1,24 @@
+
+h2 {
+  margin: 0.7rem 0;
+}
+
+.social-icon {
+  height: 18px;
+  width: 18px;
+}
+
+button {
+  background-color: #f7f7f7;
+  padding: 0.25rem 2rem;
+  border-radius: 2px;
+}
+
+.form-control {
+  margin-bottom: 0.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
