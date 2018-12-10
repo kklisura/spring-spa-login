@@ -31,10 +31,8 @@ public class AuthenticationPreserveFilter extends OncePerRequestFilter {
       OAuth2AuthorizationRequestRedirectFilter.DEFAULT_AUTHORIZATION_REQUEST_BASE_URI + "/*");
 
   @Override
-  protected void doFilterInternal(HttpServletRequest servletRequest, HttpServletResponse servletResponse,
+  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
       FilterChain filterChain) throws ServletException, IOException {
-    HttpServletRequest request = (HttpServletRequest) servletRequest;
-    HttpServletResponse response = (HttpServletResponse) servletResponse;
 
     if (shouldPreserveAuthentication(request)) {
       SecurityContext context = SecurityContextHolder.getContext();

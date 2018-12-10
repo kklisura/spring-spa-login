@@ -14,6 +14,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class AccountPrincipalUser extends AccountPrincipal implements UserDetails {
 
   /**
+   * Ctor.
+   */
+  public AccountPrincipalUser() {
+    super();
+    // Empty ctor.
+  }
+
+  /**
    * Instantiates a new Account principal.
    *
    * @param account Account.

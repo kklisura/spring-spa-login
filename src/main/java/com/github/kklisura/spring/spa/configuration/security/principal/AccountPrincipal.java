@@ -12,6 +12,13 @@ public class AccountPrincipal implements AuthenticatedPrincipal {
   private Account account;
 
   /**
+   * Ctor.
+   */
+  public AccountPrincipal() {
+    // Empty ctor.
+  }
+
+  /**
    * Instantiates a new Account principal.
    *
    * @param account Account.

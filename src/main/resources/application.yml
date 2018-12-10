@@ -4,7 +4,7 @@
 spring:
   security:
     external-login:
-      # Base redirection uri; For development purposes this should be set to http://localhost:3000 (SPA)
+      # Base redirection uri; For development purposes this should be set to http://localhost:4200 (SPA)
       # On production env. this should be set to domain name.
       base-url: http://localhost:4200
 
@@ -14,6 +14,7 @@ spring:
         registration:
           twitter:
             # This should match what we have defined in our APP on https://developer.twitter.com/ as Callback URL
+            # On production env. localhost:8080 should be changed to domain name.
             callback-url: http://localhost:8080/login/oauth1/code/twitter
 
     oauth2:

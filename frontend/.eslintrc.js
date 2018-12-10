@@ -4,6 +4,9 @@ module.exports = {
     ecmaVersion: 2017,
     sourceType: 'module'
   },
+  globals: {
+    "authenticatedAccount": true
+  },
   plugins: [
     'ember'
   ],

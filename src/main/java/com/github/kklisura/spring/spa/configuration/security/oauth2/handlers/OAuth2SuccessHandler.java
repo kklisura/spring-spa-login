@@ -59,9 +59,9 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     final Type externalAccountType = Type
         .valueOfByRegistrationId(authenticationToken.getAuthorizedClientRegistrationId());
 
-    boolean isConnectingAccounts = hasPreviousAuthentication(request);
+    boolean isLinkingAccounts = hasPreviousAuthentication(request);
 
-    if (isConnectingAccounts) {
+    if (isLinkingAccounts) {
       Authentication previousAuthentication = getPreviousAuthentication(request);
       AccountPrincipal previousPrincipal = (AccountPrincipal) previousAuthentication.getPrincipal();
 
@@ -70,7 +70,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
           oAuth2User, externalAccountType, usernameGeneratorService
       );
 
-      // Connect account with its external account.
+      // Link account with its external account.
       externalAccountService.connectAccounts(previousPrincipal.getAccount(), externalAccountInfoSupplier);
 
       restorePreviousAuthentication(request);

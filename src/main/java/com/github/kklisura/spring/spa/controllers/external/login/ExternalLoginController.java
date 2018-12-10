@@ -97,6 +97,7 @@ public class ExternalLoginController {
    */
   public static String getExternalLoginBaseUrl() {
     // NOTE(kklisura): This is a hack. :( Sorry about that. Never code like this!
+    // TODO(kklisura): Refactor this so this can be removed. Introduce a bean (configuration pojo).
     return INSTANCE.environment.getProperty(BASE_URL_CONFIGURATION_PROPERTY);
   }
 }

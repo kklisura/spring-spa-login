@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter;
 
 /**
- * Configures a filter chain to support twitter login.
+ * Configures a filter chain to support Twitter login.
  *
  * @author Kenan Klisura
  */

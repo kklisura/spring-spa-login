@@ -40,7 +40,7 @@ function waitForWindowClose(newWindow, callback) {
   }, 1000);
 }
 
-export function showOAuthWindow(oAuthType, callback) {
+export function showOAuthWindow(oAuthType) {
   let path = `/oauth2/authorization/${oAuthType}`;
   if (oAuthType === 'twitter') {
     path = `/oauth1/authorization/${oAuthType}`;

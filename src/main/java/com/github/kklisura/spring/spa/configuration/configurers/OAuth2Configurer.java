@@ -12,9 +12,10 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter;
 
 /**
- * Created by Kenan Klisura on 16/09/2018.
+ * OAuth2 configurer for Facebook, Google, Github social networks. This class is used to configure an OAuth2 login (by
+ * delegating configuration to {@link OAuth2LoginConfigurer}) and to install authentication preservation filter
+ * {@link AuthenticationPreserveFilter} before the request redirection on OAuth2 process.
  *
- * @param <B> the type parameter
  * @author Kenan Klisura
  */
 public class OAuth2Configurer<B extends HttpSecurityBuilder<B>> extends AbstractHttpConfigurer<OAuth2Configurer<B>, B> {
