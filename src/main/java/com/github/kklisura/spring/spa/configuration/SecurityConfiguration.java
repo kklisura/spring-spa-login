@@ -89,6 +89,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .httpBasic().disable()
         .formLogin().disable();
 
+    // Make sure h2-console is accessible
+    http.headers()
+        .frameOptions().disable()
+        .and()
+        .authorizeRequests().antMatchers("/h2-console/**/*").permitAll();
+
     // Setup authentication entry point.
     http.exceptionHandling()
         .authenticationEntryPoint(new RestAuthenticationEntryPoint());

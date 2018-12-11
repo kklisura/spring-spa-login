@@ -2,6 +2,8 @@
 # For all Spring related properties see https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 
 spring:
+  h2.console.enabled: true
+
   security:
     external-login:
       # Base redirection uri; For development purposes this should be set to http://localhost:4200 (SPA)

@@ -9,12 +9,10 @@ For Social login the following social networks are supported:
  - Twitter
  
 Features:
- - SPA friendly
- - Social login/signup via Facebook, Github, Google, Twitter
- - REST for username/password based login (`/api/v1/login`)
+ - Social login and signup via Facebook, Github, Google, Twitter
+ - REST API for credentials based login (`/api/v1/login`) and logout (`/api/v1/logout`)
  - Linking/unlinking accounts
  - Separate user and external (social) accounts
- - Logout (`/api/v1/logout`)
 
 ## Configuration
 
