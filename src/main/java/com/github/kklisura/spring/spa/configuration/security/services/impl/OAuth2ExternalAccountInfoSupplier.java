@@ -234,8 +234,8 @@ public class OAuth2ExternalAccountInfoSupplier implements ExternalAccountInfoSup
   private static String getAttribute(OAuth2User oAuth2User, String attribute) {
     Object attributeValue = oAuth2User.getAttributes().get(attribute);
     if (attributeValue == null) {
-      LOGGER.error("Attribute {} of oAuthUser is null.", attribute);
-      throw new RuntimeException("Attribute " + attribute + " of oAuthUser is null.");
+      LOGGER.warn("Attribute {} of oAuthUser is null.", attribute);
+      return StringUtils.EMPTY;
     }
 
     return String.valueOf(attributeValue);
