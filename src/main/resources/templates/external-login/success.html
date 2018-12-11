@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+  <script th:replace="external-login/_common.html :: notifyParent(parentJsFunction='_EXTERNAL_LOGIN_onExternalLoginSuccess', redirect = '/')"></script>
+  <style th:replace="external-login/_common.html :: style"></style>
+</head>
+<body>
+<div>
+  You have successfully logged in. Click <a href="/">here</a> to continue.
+</div>
+</body>
+</html>
