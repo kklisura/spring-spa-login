@@ -1,7 +1,10 @@
 package com.github.kklisura.spring.spa.configuration.security.filters;
 
+import static com.github.kklisura.spring.spa.configuration.security.twitter.filters.TwitterAuthorizationRequestRedirectFilter.TWITTER_AUTHORIZATION_REQUEST;
+
 import com.github.kklisura.spring.spa.configuration.security.principal.AccountPrincipal;
 import java.io.IOException;
+import java.util.Arrays;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -13,6 +16,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.OrRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -27,8 +31,12 @@ public class AuthenticationPreserveFilter extends OncePerRequestFilter {
   private static final String PREVIOUS_AUTHENTICATION_ATTRIBUTE_NAME =
       AuthenticationPreserveFilter.class.getName() + ".PREVIOUS_AUTHENTICATION_ATTRIBUTE_NAME";
 
-  private static final RequestMatcher FILTER_REQUEST_MATCHER = new AntPathRequestMatcher(
+  private static final RequestMatcher OAUTH2_AUTHORIZATION_REQUEST = new AntPathRequestMatcher(
       OAuth2AuthorizationRequestRedirectFilter.DEFAULT_AUTHORIZATION_REQUEST_BASE_URI + "/*");
+
+  private static final RequestMatcher FILTER_REQUEST_MATCHER = new OrRequestMatcher(
+      Arrays.asList(OAUTH2_AUTHORIZATION_REQUEST, TWITTER_AUTHORIZATION_REQUEST)
+  );
 
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,

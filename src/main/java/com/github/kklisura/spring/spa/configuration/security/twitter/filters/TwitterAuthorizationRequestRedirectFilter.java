@@ -22,7 +22,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
  */
 public class TwitterAuthorizationRequestRedirectFilter extends OncePerRequestFilter {
 
-  private static final RequestMatcher TWITTER_AUTHORIZATION_REQUEST = new AntPathRequestMatcher(
+  public static final RequestMatcher TWITTER_AUTHORIZATION_REQUEST = new AntPathRequestMatcher(
       "/oauth1/authorization/twitter");
 
   private static final String OAUTH_TOKEN_VALUE = TwitterAuthorizationRequestRedirectFilter.class.getName() +
