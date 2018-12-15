@@ -3,7 +3,6 @@ package com.github.kklisura.spring.spa.controllers.external.login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -77,17 +76,6 @@ public class ExternalLoginController {
   @GetMapping(value = DENIED_URL)
   public String onDeniedLogin() {
     return "external-login/denied";
-  }
-
-  /**
-   * On suggest info string.
-   *
-   * @param model the model
-   * @return the string
-   */
-  @GetMapping(value = SUGGEST_USER_INFO_URL)
-  public String onSuggestInfo(Model model) {
-    return "external-login/suggest";
   }
 
   /**
